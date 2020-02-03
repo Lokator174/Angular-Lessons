@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  head = [['Номер','id']/* ,['ФИО','name'] */,['Имя','fName'],['Фамилия','lName'],['Отчество','middleName']];
+  head = [
+    [['Номер','id', {rowspan: 2}],['ФИО','name', {colspan: 3}, true]],
+    [['Имя','fName'],['Фамилия','lName'],['Отчество','middleName']]];
   people = [
     {id:'1', fName:'Даниил', lName:'Юрин', middleName:'Андреевич'},
     {id:'2', fName:'Александр', lName:'Олейников', middleName:'Витальевич'},
