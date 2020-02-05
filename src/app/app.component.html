@@ -1,20 +1,24 @@
 
 <form [formGroup]="filter" (ngSubmit)="onFilter()">
-  <input formControlName="user" />
+  <input formControlName="user" /> <br>
+  Имя: <input formControlName="firstName" /> <br>
+  Фамилия: <input formControlName="lastName" /> <br>
+  Отчество: <input formControlName="middleName" /> <br>
   <ng-container *ngIf="filter.get('user').dirty">
-    <span *ngIf="filter.get('user').hasError('required')">Это поле нужно заполнить обязательно!</span>
-  </ng-container>
-
-  <ng-container *ngIf="filter.get('user').hasError('minlength')">
-    Длинна должны быть не меньше {{filter.get('user').getError('minlength').requiredLength()}}, а вы ввели {{filter.get('user').value.length}}
+    <ng-container *ngIf="filter.get('user').hasError('required')">
+      Это поле обязательное!
+    </ng-container>
+    
+    <ng-container *ngIf="filter.get('user').hasError('minlength')">
+      Длинна поля должна быть не меньше {{filter.get('user').getError('minlength').requiredLength}} а вы ввели {{filter.get('user').value.length}}
+    </ng-container>
   </ng-container>
   
-  <br><button type="submit" [disabled]="filter.invalid">Submit</button>
-  
-
+  <button type="submit" [disabled]="filter.invalid">Submit</button>
 </form>
-{{filter.get('user').value}}
-<button (click)="filter.controls.user.setValue('Вася привет!')">нажми</button>
+{{filter.get('user').errors  | json}}
+{{filter.value  | json}}
+<button (click)="addTable()">Click ME</button>
 
 <table>
   <thead>
@@ -36,9 +40,3 @@
     </tr>
   </tbody>
 </table>
-
-<!-- <ng-container [ngSwitch]="10">
-  <span *ngSwitchCase="10">
-    10
-  </span>
-</ng-container> -->

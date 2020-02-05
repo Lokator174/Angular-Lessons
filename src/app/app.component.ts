@@ -16,13 +16,21 @@ export class AppComponent {
     {id:'3', fName:'Сергей', lName:'Булыгин', middleName:'Евгеньевич'}
   ];
   filter = new FormGroup({
-    user: new FormControl('', [Validators.required, Validators.minLength(10)], (control) => {
-      debugger;
-      return control.value.indexOf('Вася') === - 1 ? {isvasya: false} : null;
-    })
-  });
+    user: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    middleName: new FormControl('')
+  })
   onFilter() {
     const filter = this.filter.getRawValue();
-    const = filtered = this.people.filter(({ fName }) => fName.includes(filter.user));
+    const filtered = this.people.filter(({ fName }) => fName.includes(filter.user));
+    this.people = filtered;
+  }
+  addTable() {
+    debugger;
+    const filter = this.filter.getRawValue();
+    const lenght = this.people.length + 1;
+    const cell = {id: lenght, fName: filter.firstName, lName: filter.lastName, middleName: filter.middleName};
+    this.people.push(cell);
   }
 }
