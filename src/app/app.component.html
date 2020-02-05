@@ -1,3 +1,21 @@
+
+<form [formGroup]="filter" (ngSubmit)="onFilter()">
+  <input formControlName="user" />
+  <ng-container *ngIf="filter.get('user').dirty">
+    <span *ngIf="filter.get('user').hasError('required')">Это поле нужно заполнить обязательно!</span>
+  </ng-container>
+
+  <ng-container *ngIf="filter.get('user').hasError('minlength')">
+    Длинна должны быть не меньше {{filter.get('user').getError('minlength').requiredLength()}}, а вы ввели {{filter.get('user').value.length}}
+  </ng-container>
+  
+  <br><button type="submit" [disabled]="filter.invalid">Submit</button>
+  
+
+</form>
+{{filter.get('user').value}}
+<button (click)="filter.controls.user.setValue('Вася привет!')">нажми</button>
+
 <table>
   <thead>
     <tr *ngFor="let headRow of head">
@@ -19,8 +37,8 @@
   </tbody>
 </table>
 
-<ng-container [ngSwitch]="10">
+<!-- <ng-container [ngSwitch]="10">
   <span *ngSwitchCase="10">
     10
   </span>
-</ng-container>
+</ng-container> -->

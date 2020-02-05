@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +15,14 @@ export class AppComponent {
     {id:'2', fName:'Александр', lName:'Олейников', middleName:'Витальевич'},
     {id:'3', fName:'Сергей', lName:'Булыгин', middleName:'Евгеньевич'}
   ];
+  filter = new FormGroup({
+    user: new FormControl('', [Validators.required, Validators.minLength(10)], (control) => {
+      debugger;
+      return control.value.indexOf('Вася') === - 1 ? {isvasya: false} : null;
+    })
+  });
+  onFilter() {
+    const filter = this.filter.getRawValue();
+    const = filtered = this.people.filter(({ fName }) => fName.includes(filter.user));
+  }
 }
